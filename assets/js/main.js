@@ -4,21 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ----- Subtle parallax on hands when mouse moves ----- */
-  const hands = document.querySelectorAll('.hand');
-  if (hands.length && !('ontouchstart' in window)) {
-    document.addEventListener('mousemove', (e) => {
-      const mx = (e.clientX / window.innerWidth  - 0.5) * 2; // -1 to 1
-      const my = (e.clientY / window.innerHeight - 0.5) * 2;
-      hands.forEach((h) => {
-        const depth = h.dataset.depth || 12;
-        const tx = mx * depth;
-        const ty = my * depth;
-        h.style.transform = `translate(${tx}px, ${ty}px)`;
-      });
-    });
-  }
-
   /* ----- XP window close button ----- */
   document.querySelectorAll('.win__ctrl-btn--close').forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -40,6 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         body.style.display = body.style.display === 'none' ? '' : 'none';
       }
     });
+  });
+
+  /* ----- Desync cluster character GIFs ----- */
+  document.querySelectorAll('.cluster').forEach((cluster) => {
+    const second = cluster.querySelector('.cluster__char--2');
+    if (second) {
+      const src = second.src;
+      second.src = '';                       // pause the GIF
+      setTimeout(() => { second.src = src; }, 200); // restart 400ms later
+    }
   });
 
   /* ----- Intersection Observer for fade-in animations ----- */

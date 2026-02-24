@@ -121,55 +121,118 @@ body {
 
 
 /* =============================================
-   Decorative: Hands
+   Decorative Clusters  (hand + window + characters)
+   Each side is a .cluster: hands sit BEHIND the
+   debug window, characters sit IN FRONT / inside.
    ============================================= */
-.hand {
+.cluster {
   position: fixed;
   pointer-events: none;
   z-index: 5;
-  transition: opacity var(--transition-med);
 }
 
-.hand--flip img {
+.cluster--left {
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  width: 24vw;
+  min-width: 260px;
+  max-width: 400px;
+}
+
+.cluster--right {
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  width: 24vw;
+  min-width: 260px;
+  max-width: 400px;
+}
+
+/* The debug window — gives the cluster its height */
+.cluster__win {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  pointer-events: auto;
+}
+
+/* --- Hands (behind the window, z-index 1) --- */
+.cluster__hand {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cluster__hand--bottom {
   transform: rotate(180deg);
 }
 
-.hand--tl { top: 8%;  left: 3%;  width: 180px; }
-.hand--bl { bottom: 0; left: 6%;  width: 170px; }
-.hand--tr { top: 5%;  right: 2%; width: 180px; }
-.hand--br { bottom: 0; right: 5%; width: 170px; }
-
-
-/* =============================================
-   Decorative: Side Debug Windows
-   ============================================= */
-.sidebar-win {
-  position: fixed;
-  z-index: 8;
-  width: 260px;
+/* ---- LEFT hands ---- */
+.cluster--left .cluster__hand--top {
+  width: 75%;
+  top: -100%;
+  left: -4%;
 }
 
-.sidebar-win--left  { top: 40%; left: 2%; }
-.sidebar-win--right { top: 34%; right: 2%; }
+.cluster--left .cluster__hand--bottom {
+  width: 75%;
+  bottom: -90%;
+  left: 22%;
+}
 
+/* ---- RIGHT hands ---- */
+.cluster--right .cluster__hand--top {
+  width: 75%;
+  top: -96%;
+  right: -18%;
+}
 
-/* =============================================
-   Decorative: Pixel Characters
-   ============================================= */
-.char {
-  position: fixed;
+.cluster--right .cluster__hand--bottom {
+  width: 75%;
+  bottom: -86%;
+  right: 18%;
+}
+
+/* --- Characters (in front of the window, z-index 3) --- */
+.cluster__char {
+  position: absolute;
+  z-index: 3;
+  display: block;
   pointer-events: none;
-  z-index: 10;
-}
-
-.char img {
   image-rendering: pixelated;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.char--l1 { top: 39%; left: -1%;  width: 95px; }
-.char--l2 { top: 42%; left: 8%;   width: 95px; }
-.char--r1 { top: 32%; right: 14%; width: 95px; }
-.char--r2 { top: 35%; right: 1%;  width: 95px; }
+/* ---- LEFT characters ---- */
+.cluster--left .cluster__char--1 {
+  width: 43%;
+  top: 2%;
+  left: 3%;
+}
+
+.cluster--left .cluster__char--2 {
+  width: 43%;
+  top: -18%;
+  left: 45%;
+}
+
+/* ---- RIGHT characters ---- */
+.cluster--right .cluster__char--1 {
+  width: 43%;
+  top: -19%;
+  left: 10%;
+}
+
+.cluster--right .cluster__char--2 {
+  width: 43%;
+  top: -1%;
+  right: 7%;
+}
 
 
 /* =============================================
@@ -192,36 +255,7 @@ body {
   z-index: 15;
 }
 
-/* Side debug windows (absolute within hero) */
-.hero__debug-left {
-  position: absolute;
-  top: 42%;
-  left: 2%;
-  width: 280px;
-  z-index: 8;
-}
-
-.hero__debug-right {
-  position: absolute;
-  top: 36%;
-  right: 2%;
-  width: 280px;
-  z-index: 8;
-}
-
-/* Characters positioned absolutely within hero */
-.hero .char { position: absolute; }
-.hero .char--l1 { top: 41%; left: -1%;  width: 100px; }
-.hero .char--l2 { top: 44%; left: 8%;   width: 100px; }
-.hero .char--r1 { top: 34%; right: 14%; width: 100px; }
-.hero .char--r2 { top: 36%; right: 1%;  width: 100px; }
-
-/* Hands also absolute within hero */
-.hero .hand { position: absolute; }
-.hero .hand--tl { top: 8%;  left: 3%;  width: 180px; }
-.hero .hand--bl { bottom: 0; left: 6%;  width: 170px; }
-.hero .hand--tr { top: 5%;  right: 2%; width: 180px; }
-.hero .hand--br { bottom: 0; right: 5%; width: 170px; }
+/* Side decorative elements are handled by .cluster components */
 
 
 /* =============================================
@@ -305,8 +339,8 @@ body {
   width: 100%;
 }
 
-.lead-row .card { max-width: 300px; }
-.lead-row .card__avatar { max-width: 200px; }
+.lead-row .card { max-width: 300px; overflow: visible; }
+.lead-row .card .win__body { overflow: visible; }
 .lead-row .card__name { font-size: 32px; }
 
 /* Cats surrounding the lead */
@@ -315,6 +349,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  overflow: visible;
 }
 
 .lead-cats__main {
@@ -327,14 +362,17 @@ body {
 
 .lead-cats__pet {
   position: absolute;
-  width: 90px;
+  width: 220px;
   image-rendering: pixelated;
-  z-index: 1;
+  z-index: 3;
 }
 
-.lead-cats__pet--left   { left: 30px;  top: -10px; }
-.lead-cats__pet--right  { right: 30px; top: 0; }
-.lead-cats__pet--bottom { right: 20px; bottom: -20px; }
+/* Left cat: far left, overlapping the card edge */
+.lead-cats__pet--left   { left: -140px; top: 10px; }
+/* Right-top cat: upper right, peeking above title bar */
+.lead-cats__pet--right  { right: -140px; top: -40px; }
+/* Right-bottom cat: lower right, hanging below */
+.lead-cats__pet--bottom { right: -120px; bottom: -80px; }
 
 
 /* =============================================
@@ -420,22 +458,15 @@ body {
    ============================================= */
 @media (max-width: 1000px) {
   .hero__wip { width: 280px; }
-  .hero__debug-left,
-  .hero__debug-right { width: 200px; }
-  .sidebar-win { width: 180px; }
-  .hand { width: 130px !important; }
-  .char { width: 75px !important; }
-  .hero .char { width: 80px !important; }
+  .cluster { width: 200px !important; min-width: 0; }
+  .cluster__hand { width: 120px !important; }
+  .cluster__char { width: 70px !important; }
   .cta__link { font-size: 14px; padding: 12px 22px; }
   .team-wrap { width: 92%; }
 }
 
 @media (max-width: 650px) {
-  .hero__debug-left,
-  .hero__debug-right,
-  .sidebar-win,
-  .char { display: none; }
-  .hand { width: 90px !important; }
+  .cluster { display: none; }
   .hero__wip { width: 220px; }
   .cta__link { font-size: 12px; padding: 10px 16px; }
   .team-wrap { width: 98%; }
