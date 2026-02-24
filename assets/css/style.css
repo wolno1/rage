@@ -1,0 +1,444 @@
+/* =============================================
+   RAGE — Global Styles
+   ============================================= */
+
+/* --- Custom Properties --- */
+:root {
+  --win-border: #0a0a6e;
+  --win-title-start: #9e92dd;
+  --win-title-mid: #7466cc;
+  --win-title-end: #6a5cbf;
+  --win-btn-bg: #c0c0c0;
+  --accent: #ff0000;
+  --bg-bliss: url("https://files.strawcdn.com/straw/QyuHzzcjMZqJyZJsJfBU.jpg");
+  --font-mono: 'Courier New', Courier, monospace;
+  --font-ui: 'Tahoma', 'Segoe UI', sans-serif;
+  --font-pixel: 'VT323', monospace;
+  --shadow-win: 2px 2px 10px rgba(0, 0, 0, .4);
+  --transition-fast: .2s ease;
+  --transition-med: .35s ease;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* --- Body --- */
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg-bliss) center / cover fixed no-repeat;
+  font-family: var(--font-mono);
+  color: #000;
+}
+
+
+/* =============================================
+   XP Window Component
+   ============================================= */
+.win {
+  border: 2px solid var(--win-border);
+  box-shadow: var(--shadow-win);
+  overflow: hidden;
+  background: #fff;
+}
+
+.win__bar {
+  background: linear-gradient(180deg, var(--win-title-start) 0%, var(--win-title-mid) 40%, var(--win-title-end) 100%);
+  color: #fff;
+  padding: 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 11px;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.win__controls {
+  display: flex;
+  gap: 2px;
+}
+
+.win__ctrl-btn {
+  width: 16px;
+  height: 14px;
+  background: var(--win-btn-bg);
+  border: 1px outset #dfdfdf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: #000;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.win__ctrl-btn:active {
+  border-style: inset;
+}
+
+.win__body {
+  padding: 8px 10px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Variant: image body (no padding, flush) */
+.win--img .win__body {
+  padding: 0;
+  line-height: 0;
+}
+
+
+/* =============================================
+   Decorative: Hands
+   ============================================= */
+.hand {
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity var(--transition-med);
+}
+
+.hand--flip img {
+  transform: rotate(180deg);
+}
+
+.hand--tl { top: 8%;  left: 3%;  width: 180px; }
+.hand--bl { bottom: 0; left: 6%;  width: 170px; }
+.hand--tr { top: 5%;  right: 2%; width: 180px; }
+.hand--br { bottom: 0; right: 5%; width: 170px; }
+
+
+/* =============================================
+   Decorative: Side Debug Windows
+   ============================================= */
+.sidebar-win {
+  position: fixed;
+  z-index: 8;
+  width: 260px;
+}
+
+.sidebar-win--left  { top: 40%; left: 2%; }
+.sidebar-win--right { top: 34%; right: 2%; }
+
+
+/* =============================================
+   Decorative: Pixel Characters
+   ============================================= */
+.char {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.char img {
+  image-rendering: pixelated;
+}
+
+.char--l1 { top: 39%; left: -1%;  width: 95px; }
+.char--l2 { top: 42%; left: 8%;   width: 95px; }
+.char--r1 { top: 32%; right: 14%; width: 95px; }
+.char--r2 { top: 35%; right: 1%;  width: 95px; }
+
+
+/* =============================================
+   Page-Specific: Index — Hero
+   ============================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* WIP.txt floating window */
+.hero__wip {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  z-index: 15;
+}
+
+/* Side debug windows (absolute within hero) */
+.hero__debug-left {
+  position: absolute;
+  top: 42%;
+  left: 2%;
+  width: 280px;
+  z-index: 8;
+}
+
+.hero__debug-right {
+  position: absolute;
+  top: 36%;
+  right: 2%;
+  width: 280px;
+  z-index: 8;
+}
+
+/* Characters positioned absolutely within hero */
+.hero .char { position: absolute; }
+.hero .char--l1 { top: 41%; left: -1%;  width: 100px; }
+.hero .char--l2 { top: 44%; left: 8%;   width: 100px; }
+.hero .char--r1 { top: 34%; right: 14%; width: 100px; }
+.hero .char--r2 { top: 36%; right: 1%;  width: 100px; }
+
+/* Hands also absolute within hero */
+.hero .hand { position: absolute; }
+.hero .hand--tl { top: 8%;  left: 3%;  width: 180px; }
+.hero .hand--bl { bottom: 0; left: 6%;  width: 170px; }
+.hero .hand--tr { top: 5%;  right: 2%; width: 180px; }
+.hero .hand--br { bottom: 0; right: 5%; width: 170px; }
+
+
+/* =============================================
+   CTA Button
+   ============================================= */
+.cta {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cta__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 28px;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(255, 0, 0, .35);
+}
+
+.cta__link:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 24px rgba(255, 0, 0, .5);
+}
+
+.cta__icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.cta__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.3;
+}
+
+
+/* =============================================
+   Page-Specific: Team
+   ============================================= */
+.team-wrap {
+  position: relative;
+  z-index: 15;
+  width: 540px;
+  max-width: 96%;
+  margin: 30px auto 60px;
+}
+
+.team-wrap > .win > .win__body {
+  padding: 14px 18px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Team grid: 2-column for member cards */
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Lead member (RAGEOWN) */
+.lead-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.lead-row .card { max-width: 300px; }
+.lead-row .card__avatar { max-width: 200px; }
+.lead-row .card__name { font-size: 32px; }
+
+/* Cats surrounding the lead */
+.lead-cats {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.lead-cats__main {
+  display: block;
+  width: 160px;
+  image-rendering: pixelated;
+  position: relative;
+  z-index: 2;
+}
+
+.lead-cats__pet {
+  position: absolute;
+  width: 90px;
+  image-rendering: pixelated;
+  z-index: 1;
+}
+
+.lead-cats__pet--left   { left: 30px;  top: -10px; }
+.lead-cats__pet--right  { right: 30px; top: 0; }
+.lead-cats__pet--bottom { right: 20px; bottom: -20px; }
+
+
+/* =============================================
+   Member Card Component
+   ============================================= */
+.card {
+  width: 100%;
+  max-width: 240px;
+}
+
+.card .win__body {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.card__avatar {
+  width: 100%;
+  max-width: 160px;
+  image-rendering: pixelated;
+  margin: 0 auto;
+}
+
+.card__name {
+  font-family: var(--font-pixel);
+  font-size: 28px;
+  color: #000;
+  margin-top: 4px;
+}
+
+.card__handle {
+  font-family: var(--font-pixel);
+  font-size: 16px;
+  color: #808080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.card__handle img {
+  width: 14px;
+  height: 14px;
+}
+
+.card__role {
+  font-family: var(--font-pixel);
+  font-size: 17px;
+  color: #000;
+  margin-top: 2px;
+}
+
+
+/* =============================================
+   Utility: Fade-In Animation
+   ============================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp .6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in:nth-child(2) { animation-delay: .08s; }
+.fade-in:nth-child(3) { animation-delay: .16s; }
+.fade-in:nth-child(4) { animation-delay: .24s; }
+.fade-in:nth-child(5) { animation-delay: .32s; }
+.fade-in:nth-child(6) { animation-delay: .40s; }
+.fade-in:nth-child(7) { animation-delay: .48s; }
+
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 1000px) {
+  .hero__wip { width: 280px; }
+  .hero__debug-left,
+  .hero__debug-right { width: 200px; }
+  .sidebar-win { width: 180px; }
+  .hand { width: 130px !important; }
+  .char { width: 75px !important; }
+  .hero .char { width: 80px !important; }
+  .cta__link { font-size: 14px; padding: 12px 22px; }
+  .team-wrap { width: 92%; }
+}
+
+@media (max-width: 650px) {
+  .hero__debug-left,
+  .hero__debug-right,
+  .sidebar-win,
+  .char { display: none; }
+  .hand { width: 90px !important; }
+  .hero__wip { width: 220px; }
+  .cta__link { font-size: 12px; padding: 10px 16px; }
+  .team-wrap { width: 98%; }
+  .team-grid { grid-template-columns: 1fr; }
+  .card { max-width: 100%; }
+}
