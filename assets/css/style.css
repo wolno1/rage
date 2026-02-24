@@ -245,14 +245,23 @@ body {
   overflow: hidden;
 }
 
-/* WIP.txt floating window */
-.hero__wip {
+/* Game title */
+.hero__title {
   position: absolute;
-  top: 3%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  width: 340px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   z-index: 15;
+}
+
+.hero__title img {
+  height: 140px;
+  width: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, .5));
 }
 
 /* Side decorative elements are handled by .cluster components */
@@ -457,7 +466,7 @@ body {
    Responsive
    ============================================= */
 @media (max-width: 1000px) {
-  .hero__wip { width: 280px; }
+  .hero__title img { height: 60px; }
   .cluster { width: 200px !important; min-width: 0; }
   .cluster__hand { width: 120px !important; }
   .cluster__char { width: 70px !important; }
@@ -467,7 +476,7 @@ body {
 
 @media (max-width: 650px) {
   .cluster { display: none; }
-  .hero__wip { width: 220px; }
+  .hero__title img { height: 45px; }
   .cta__link { font-size: 12px; padding: 10px 16px; }
   .team-wrap { width: 98%; }
   .team-grid { grid-template-columns: 1fr; }
