@@ -4,14 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ----- Random title letter variants ----- */
-  document.querySelectorAll('.hero__title img[data-letter]').forEach((img) => {
-    const letter = img.dataset.letter;
-    const variants = parseInt(img.dataset.variants, 10) || 1;
-    const pick = Math.floor(Math.random() * variants) + 1;
-    img.setAttribute('src', 'assets/img/title/' + letter + '/' + pick + '.png');
-  });
-
   /* ----- XP window close button ----- */
   document.querySelectorAll('.win__ctrl-btn--close').forEach((btn) => {
     btn.addEventListener('click', () => {
