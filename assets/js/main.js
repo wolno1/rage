@@ -5,11 +5,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ----- Random title letter variants ----- */
+  const basePath = document.querySelector('link[rel="stylesheet"]')?.href.replace(/assets\/css\/style\.css.*$/, '') || '';
   document.querySelectorAll('.hero__title img[data-letter]').forEach((img) => {
     const letter = img.dataset.letter;
     const variants = parseInt(img.dataset.variants, 10) || 1;
     const pick = Math.floor(Math.random() * variants) + 1;
-    img.src = `assets/img/title/${letter}/${pick}.png`;
+    img.src = basePath + `assets/img/title/${letter}/${pick}.png`;
   });
 
   /* ----- XP window close button ----- */
