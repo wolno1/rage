@@ -21,12 +21,24 @@
           { name: 'M', variants: 5 },
           { name: 'C', variants: 4 }
         ];
-        var html = '';
-        for (var i = 0; i < letters.length; i++) {
+
+        var container = document.getElementById('gameTitle');
+        var loaded = 0;
+        var total = letters.length;
+
+        for (var i = 0; i < total; i++) {
           var pick = Math.floor(Math.random() * letters[i].variants) + 1;
-          html += '<img src="assets/img/title/' + letters[i].name + '/' + pick + '.png" alt="' + letters[i].name + '">';
+          var img = new Image();
+          img.alt = letters[i].name;
+          img.src = 'assets/img/title/' + letters[i].name + '/' + pick + '.png';
+          img.onload = img.onerror = function() {
+            loaded++;
+            if (loaded === total) {
+              container.classList.add('hero__title--loaded');
+            }
+          };
+          container.appendChild(img);
         }
-        document.getElementById('gameTitle').innerHTML = html;
       })();
     </script>
 
