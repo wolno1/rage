@@ -4,6 +4,32 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ----- Page load reveal sequence ----- */
+  const loader = document.getElementById('loader');
+  const reveals = document.querySelectorAll('.reveal');
+
+  function revealPage() {
+    // Fade out the loading overlay
+    loader.classList.add('loader--hidden');
+
+    // Stagger the reveal of each element
+    reveals.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('reveal--visible');
+      }, 200 + i * 200);
+    });
+
+    // Remove loader from DOM after transition
+    setTimeout(() => { loader.remove(); }, 800);
+  }
+
+  // Wait for all images + resources, then reveal
+  if (document.readyState === 'complete') {
+    revealPage();
+  } else {
+    window.addEventListener('load', revealPage);
+  }
+
   /* ----- XP window close button ----- */
   document.querySelectorAll('.win__ctrl-btn--close').forEach((btn) => {
     btn.addEventListener('click', () => {

@@ -9,10 +9,15 @@
 </head>
 <body>
 
+  <!-- Loading overlay -->
+  <div class="loader" id="loader">
+    <div class="loader__text">Loading...</div>
+  </div>
+
   <div class="hero">
 
     <!-- Game Title -->
-    <div class="hero__title" id="gameTitle"></div>
+    <div class="hero__title reveal" id="gameTitle"></div>
     <script>
       (function() {
         var letters = [
@@ -43,7 +48,7 @@
     </script>
 
     <!-- CTA: Team Button -->
-    <div class="cta">
+    <div class="cta reveal">
       <a class="cta__link" href="team.html">
         <span class="cta__icon">&#10010;</span>
         <span class="cta__text">
@@ -56,7 +61,7 @@
   </div>
 
   <!-- Left Cluster: hands behind ➜ window ➜ characters in front -->
-  <div class="cluster cluster--left">
+  <div class="cluster cluster--left reveal">
     <img class="cluster__hand cluster__hand--top" src="assets/img/hand-top-left.gif" alt="">
     <img class="cluster__hand cluster__hand--bottom" src="assets/img/hand-bottom-left.gif" alt="">
     <div class="win win--img cluster__win">
@@ -77,7 +82,7 @@
   </div>
 
   <!-- Right Cluster: hands behind ➜ window ➜ characters in front -->
-  <div class="cluster cluster--right">
+  <div class="cluster cluster--right reveal">
     <img class="cluster__hand cluster__hand--top" src="assets/img/hand-top-right.gif" alt="">
     <img class="cluster__hand cluster__hand--bottom" src="assets/img/hand-bottom-right.gif" alt="">
     <div class="win win--img cluster__win">
