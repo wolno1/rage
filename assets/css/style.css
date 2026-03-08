@@ -543,20 +543,42 @@ body {
    ============================================= */
 .secret-btn {
   position: absolute;
-  z-index: 0;            /* behind the window (z-index 2) */
-  top: 50%;
+  z-index: 1;            /* between hands (1) and window (2), peeks at edges */
+  bottom: 6px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30px;
-  height: 30px;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 24px;
   background: transparent;
   border: none;
   cursor: pointer;
   pointer-events: auto;
-  opacity: 0;
-  transition: opacity .2s;
+  padding: 0;
 }
-.secret-btn:hover { opacity: .08; background: #fff; }
+
+/* Tiny blinking pixel — the clue */
+.secret-btn__clue {
+  display: block;
+  width: 4px;
+  height: 4px;
+  margin: auto;
+  border-radius: 50%;
+  background: #0f0;
+  opacity: 0;
+  animation: clueFlicker 4s ease-in-out infinite;
+}
+
+@keyframes clueFlicker {
+  0%, 85%, 100% { opacity: 0; }
+  90%           { opacity: .9; }
+  95%           { opacity: 0; }
+  97%           { opacity: .7; }
+}
+
+.secret-btn:hover .secret-btn__clue {
+  opacity: 1;
+  animation: none;
+}
 
 
 /* =============================================

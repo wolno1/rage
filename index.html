@@ -63,8 +63,6 @@
 
   <!-- Left Cluster: hands behind ➜ window ➜ characters in front -->
   <div class="cluster cluster--left reveal">
-    <!-- Secret button hidden behind the window -->
-    <button class="secret-btn" id="secretBtn" aria-hidden="true"></button>
     <img class="cluster__hand cluster__hand--top" src="assets/img/hand-top-left.gif" alt="">
     <img class="cluster__hand cluster__hand--bottom" src="assets/img/hand-bottom-left.gif" alt="">
     <div class="win win--img cluster__win">
@@ -82,6 +80,10 @@
     </div>
     <img class="cluster__char cluster__char--1" src="assets/img/char-left-2.gif" alt="">
     <img class="cluster__char cluster__char--2" src="assets/img/char-left-1.gif" alt="">
+    <!-- Secret button hidden behind the window -->
+    <button class="secret-btn" id="secretBtn" aria-hidden="true">
+      <span class="secret-btn__clue"></span>
+    </button>
   </div>
 
   <!-- Right Cluster: hands behind ➜ window ➜ characters in front -->
