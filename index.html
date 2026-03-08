@@ -80,10 +80,6 @@
     </div>
     <img class="cluster__char cluster__char--1" src="assets/img/char-left-2.gif" alt="">
     <img class="cluster__char cluster__char--2" src="assets/img/char-left-1.gif" alt="">
-    <!-- Secret button hidden behind the window -->
-    <button class="secret-btn" id="secretBtn" aria-hidden="true">
-      <span class="secret-btn__clue"></span>
-    </button>
   </div>
 
   <!-- Right Cluster: hands behind ➜ window ➜ characters in front -->
@@ -106,6 +102,11 @@
     <img class="cluster__char cluster__char--1" src="assets/img/char-right-1.gif" alt="">
     <img class="cluster__char cluster__char--2" src="assets/img/char-right-2.gif" alt="">
   </div>
+
+  <!-- Secret button (positioned over left window) -->
+  <button class="secret-btn" id="secretBtn">
+    <span class="secret-btn__clue"></span>
+  </button>
 
   <!-- Terminal window (hidden) -->
   <div class="term-backdrop" id="termBackdrop">

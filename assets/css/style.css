@@ -542,15 +542,13 @@ body {
    Secret Button (hidden behind left cluster window)
    ============================================= */
 .secret-btn {
-  position: absolute;
-  z-index: 1;            /* between hands (1) and window (2), peeks at edges */
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  z-index: 4;            /* below clusters (5), hidden behind the window */
   width: 40px;
-  height: 24px;
-  background: transparent;
-  border: none;
+  height: 40px;
+  background: rgba(255, 0, 0, 0.5);
+  border: 2px solid red;
+  border-radius: 4px;
   cursor: pointer;
   pointer-events: auto;
   padding: 0;
@@ -559,20 +557,23 @@ body {
 /* Tiny blinking pixel — the clue */
 .secret-btn__clue {
   display: block;
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
   margin: auto;
   border-radius: 50%;
   background: #0f0;
-  opacity: 0;
   animation: clueFlicker 4s ease-in-out infinite;
 }
 
 @keyframes clueFlicker {
-  0%, 85%, 100% { opacity: 0; }
-  90%           { opacity: .9; }
+  0%, 85%, 100% { opacity: .3; }
+  90%           { opacity: 1; }
   95%           { opacity: 0; }
-  97%           { opacity: .7; }
+  97%           { opacity: .8; }
+}
+
+.secret-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
 }
 
 .secret-btn:hover .secret-btn__clue {

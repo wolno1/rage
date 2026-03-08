@@ -81,4 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ----- Position secret button over left cluster window ----- */
+  const secretBtn = document.getElementById('secretBtn');
+  const leftWin = document.querySelector('.cluster--left .cluster__win');
+
+  function positionSecretBtn() {
+    if (!secretBtn || !leftWin) return;
+    const rect = leftWin.getBoundingClientRect();
+    secretBtn.style.left = (rect.left + rect.width / 2 - 20) + 'px';
+    secretBtn.style.top  = (rect.top + rect.height / 2 - 20) + 'px';
+  }
+
+  if (secretBtn && leftWin) {
+    positionSecretBtn();
+    window.addEventListener('resize', positionSecretBtn);
+    window.addEventListener('scroll', positionSecretBtn);
+    setTimeout(positionSecretBtn, 1500);
+  }
+
 });
