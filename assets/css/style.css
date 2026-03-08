@@ -537,6 +537,129 @@ body {
 /* =============================================
    Responsive
    ============================================= */
+
+/* =============================================
+   Secret Button (hidden behind left cluster window)
+   ============================================= */
+.secret-btn {
+  position: absolute;
+  z-index: 0;            /* behind the window (z-index 2) */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.secret-btn:hover { opacity: .08; background: #fff; }
+
+
+/* =============================================
+   Terminal — XP Window with CMD
+   ============================================= */
+
+/* Backdrop: dim background */
+.term-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, .45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.term-backdrop--open {
+  display: flex;
+}
+
+/* The XP window shell */
+.term-win {
+  width: 750px;
+  max-width: 96vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 4px 20px rgba(0,0,0,.7);
+  animation: termOpen .25s ease;
+}
+
+@keyframes termOpen {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.term-win__bar {
+  cursor: default;
+}
+
+/* CMD body */
+.term-body {
+  background: #000;
+  font-family: 'VT323', 'Fixedsys', 'Courier New', Courier, monospace;
+  font-size: 16px;
+  line-height: 1.3;
+  color: #c0c0c0;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+  max-height: 70vh;
+  overflow: hidden;
+}
+
+.term-body__screen {
+  flex: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Scrollbar */
+.term-body__screen::-webkit-scrollbar { width: 16px; }
+.term-body__screen::-webkit-scrollbar-track { background: #000; }
+.term-body__screen::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid #000;
+}
+.term-body__screen::-webkit-scrollbar-button { display: block; height: 16px; background: #c0c0c0; }
+
+/* Input line */
+.term-body__input-line {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.term-body__prompt {
+  color: #c0c0c0;
+  white-space: pre;
+}
+
+.term-body__input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #c0c0c0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  caret-color: #c0c0c0;
+  padding: 0;
+}
+
+/* =============================================
+   Responsive (cont.)
+   ============================================= */
 @media (max-width: 1000px) {
   .hero__title img { width: 52px; height: 60px; }
   .cluster { width: 200px !important; min-width: 0; }

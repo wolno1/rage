@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAGE — Home</title>
-  <meta name="description" content="RAGE game — coming soon. Still making it, stand by!">
+  <title>TFMC — Home</title>
+  <meta name="description" content="TFMC game — coming soon. Still making it, stand by!">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 </head>
 <body>
 
@@ -62,6 +63,8 @@
 
   <!-- Left Cluster: hands behind ➜ window ➜ characters in front -->
   <div class="cluster cluster--left reveal">
+    <!-- Secret button hidden behind the window -->
+    <button class="secret-btn" id="secretBtn" aria-hidden="true"></button>
     <img class="cluster__hand cluster__hand--top" src="assets/img/hand-top-left.gif" alt="">
     <img class="cluster__hand cluster__hand--bottom" src="assets/img/hand-bottom-left.gif" alt="">
     <div class="win win--img cluster__win">
@@ -102,6 +105,28 @@
     <img class="cluster__char cluster__char--2" src="assets/img/char-right-2.gif" alt="">
   </div>
 
+  <!-- Terminal window (hidden) -->
+  <div class="term-backdrop" id="termBackdrop">
+    <div class="win term-win" id="terminal">
+      <div class="win__bar term-win__bar">
+        <span>C:\WINDOWS\system32\cmd.exe</span>
+        <div class="win__controls">
+          <div class="win__ctrl-btn win__ctrl-btn--min" id="termMin">&#8212;</div>
+          <div class="win__ctrl-btn">&#9633;</div>
+          <div class="win__ctrl-btn win__ctrl-btn--close" id="termClose">&#10005;</div>
+        </div>
+      </div>
+      <div class="term-body">
+        <div class="term-body__screen" id="termScreen"></div>
+        <div class="term-body__input-line" id="termInputLine" style="display:none;">
+          <span class="term-body__prompt">C:\&gt;</span>
+          <input class="term-body__input" id="termInput" type="text" spellcheck="false" autocomplete="off">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/terminal.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>
