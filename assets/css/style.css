@@ -552,6 +552,12 @@ body {
   cursor: pointer;
   pointer-events: auto;
   padding: 0;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+.secret-btn--visible {
+  opacity: 1;
 }
 
 /* Tiny blinking pixel — the clue */
@@ -699,4 +705,181 @@ body {
   .team-wrap { width: 98%; }
   .team-grid { grid-template-columns: 1fr; }
   .card { max-width: 100%; }
+  .about-wrap { width: 98%; }
+}
+
+
+/* =============================================
+   Page-Specific: About / Game Description
+   ============================================= */
+.about-wrap {
+  position: relative;
+  z-index: 15;
+  width: 620px;
+  max-width: 96%;
+  margin: 30px auto 60px;
+}
+
+.about-body {
+  padding: 0 !important;
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  line-height: 1.6;
+  color: #000;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 27px,
+      #e0dfe0 27px,
+      #e0dfe0 28px
+    ),
+    #fff;
+}
+
+/* --- Marquee banner --- */
+.retro-marquee {
+  overflow: hidden;
+  background: #000080;
+  color: #ff0;
+  font-family: var(--font-pixel);
+  font-size: 18px;
+  padding: 4px 0;
+  white-space: nowrap;
+  border-bottom: 2px dashed #ff0;
+}
+
+.retro-marquee__text {
+  display: inline-block;
+  animation: marqueeScroll 14s linear infinite;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --- Retro dividers --- */
+.retro-hr {
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: #808080;
+  padding: 4px 0;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+.retro-hr--stars {
+  color: #ff0000;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,0,0,.08), transparent);
+}
+
+/* --- Content sections --- */
+.about-section {
+  padding: 10px 18px;
+}
+
+.about-section p {
+  margin: 6px 0;
+}
+
+/* --- Headings --- */
+.about-heading {
+  font-family: var(--font-pixel);
+  font-size: 28px;
+  text-align: center;
+  color: #000080;
+  text-shadow: 1px 1px 0 #c0c0c0;
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+/* --- Greeting --- */
+.about-greeting {
+  font-size: 24px;
+  text-align: center;
+  color: #000;
+}
+
+/* --- Blink effect (90s classic) --- */
+.retro-blink {
+  animation: retroBlink 1s step-end infinite;
+  color: #ff0000;
+  font-weight: 700;
+}
+
+@keyframes retroBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* --- Highlight spans --- */
+.retro-highlight {
+  background: #ff0;
+  color: #000;
+  padding: 0 3px;
+  font-weight: 700;
+  box-shadow: 1px 1px 0 #808080;
+}
+
+.retro-highlight--star {
+  background: linear-gradient(90deg, #ff0, #ffa500);
+  color: #800000;
+  font-size: 1.1em;
+}
+
+/* --- Footer area --- */
+.retro-footer {
+  text-align: center;
+  padding: 14px 18px 20px;
+  border-top: 2px solid #c0c0c0;
+  background: #e8e8e8;
+}
+
+.retro-counter {
+  font-family: var(--font-pixel);
+  font-size: 18px;
+  color: #008000;
+  background: #000;
+  display: inline-block;
+  padding: 3px 12px;
+  border: 2px inset #808080;
+  margin-bottom: 6px;
+}
+
+.retro-stamp {
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  color: #808080;
+  margin: 4px 0 10px;
+}
+
+.retro-back {
+  display: inline-block;
+  font-family: var(--font-pixel);
+  font-size: 20px;
+  color: #000;
+  background: var(--accent);
+  padding: 6px 18px;
+  border: 2px outset #ff6666;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.retro-back:hover {
+  transform: scale(1.06);
+}
+
+/* --- Nav buttons row (homepage) --- */
+.cta-row {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 16px;
 }

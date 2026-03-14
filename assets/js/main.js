@@ -96,7 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
     positionSecretBtn();
     window.addEventListener('resize', positionSecretBtn);
     window.addEventListener('scroll', positionSecretBtn);
-    setTimeout(positionSecretBtn, 1500);
+    // Show the secret button only after the left cluster has revealed
+    var leftCluster = leftWin.closest('.cluster--left');
+    if (leftCluster) {
+      leftCluster.addEventListener('transitionend', function handler(e) {
+        if (e.propertyName === 'opacity') {
+          positionSecretBtn();
+          secretBtn.classList.add('secret-btn--visible');
+          leftCluster.removeEventListener('transitionend', handler);
+        }
+      });
+    }
   }
 
 });
