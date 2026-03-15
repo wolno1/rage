@@ -45,6 +45,20 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: wavy;
+}
+
+/* 90s-style scrollbar */
+::-webkit-scrollbar { width: 18px; }
+::-webkit-scrollbar-track { background: #c0c0c0; border: 1px solid #808080; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #dfdfdf, #b0b0b0);
+  border: 2px outset #dfdfdf;
+}
+::-webkit-scrollbar-button { display: block; height: 18px; background: #c0c0c0; border: 2px outset #dfdfdf; }
+
 
 /* --- Body --- */
 body {
@@ -54,6 +68,23 @@ body {
   background: var(--bg-bliss) center / cover fixed no-repeat;
   font-family: var(--font-mono);
   color: #000;
+  cursor: default
+}
+
+/* Subtle CRT scanline overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, .03) 2px,
+    rgba(0, 0, 0, .03) 4px
+  );
 }
 
 
@@ -129,6 +160,7 @@ body {
   box-shadow: var(--shadow-win);
   overflow: hidden;
   background: #fff;
+  image-rendering: pixelated;
 }
 
 .win__bar {
@@ -360,16 +392,23 @@ body {
   font-size: 16px;
   font-weight: 700;
   padding: 14px 28px;
-  border: none;
+  border: 3px outset #ff6666;
   white-space: nowrap;
   cursor: pointer;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
   box-shadow: 0 4px 16px rgba(255, 0, 0, .35);
+  image-rendering: pixelated;
 }
 
 .cta__link:hover {
   transform: scale(1.06);
   box-shadow: 0 6px 24px rgba(255, 0, 0, .5);
+  text-decoration: none;
+}
+
+.cta__link:active {
+  border-style: inset;
+  transform: scale(.98);
 }
 
 .cta__icon {
@@ -706,6 +745,8 @@ body {
   .team-grid { grid-template-columns: 1fr; }
   .card { max-width: 100%; }
   .about-wrap { width: 98%; }
+  .devlogs-wrap { width: 98%; }
+  .note { max-width: 100%; }
 }
 
 
@@ -812,8 +853,8 @@ body {
 }
 
 @keyframes retroBlink {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0; }
+  0%, 100% { color: #ff0000; }
+  50%      { color: #ff8c00; }
 }
 
 /* --- Highlight spans --- */
@@ -882,4 +923,144 @@ body {
   transform: translate(-50%, -50%);
   display: flex;
   gap: 16px;
+}
+
+
+/* =============================================
+   Page-Specific: Devlogs — Crumpled Paper Notes
+   ============================================= */
+.devlogs-wrap {
+  position: relative;
+  z-index: 15;
+  width: 640px;
+  max-width: 96%;
+  margin: 30px auto 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.devlogs-title {
+  font-family: var(--font-pixel);
+  font-size: 42px;
+  color: #fff;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* --- Individual note card --- */
+.note {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  padding: 28px 24px 22px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 25px,
+      rgba(0, 0, 0, .04) 25px,
+      rgba(0, 0, 0, .04) 26px
+    ),
+    linear-gradient(135deg, #fdf6e3 0%, #f5edda 40%, #efe4c8 70%, #f8f0dc 100%);
+  border: 1px solid #d4c9a8;
+  box-shadow:
+    3px 3px 8px rgba(0, 0, 0, .25),
+    inset 0 0 40px rgba(0, 0, 0, .03);
+  font-family: var(--font-pixel);
+  font-size: 19px;
+  line-height: 1.6;
+  color: #2a2a2a;
+  transition: transform var(--transition-fast);
+}
+
+.note::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(0,0,0,.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 20%, rgba(0,0,0,.03) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Slight tilts for scattered look */
+.note--tilt-r { transform: rotate(.8deg); }
+.note--tilt-l { transform: rotate(-.6deg); }
+.note--tilt-r:hover { transform: rotate(0deg) scale(1.01); }
+.note--tilt-l:hover { transform: rotate(0deg) scale(1.01); }
+
+/* Pushpin */
+.note__pin {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 40% 35%, #ff4444, #aa0000);
+  border-radius: 50%;
+  border: 2px solid #880000;
+  box-shadow: 1px 2px 4px rgba(0,0,0,.4);
+  z-index: 2;
+}
+
+/* Tape strips */
+.note__tape {
+  position: absolute;
+  width: 60px;
+  height: 20px;
+  background: rgba(255, 255, 200, .55);
+  border: 1px solid rgba(200, 190, 140, .4);
+  z-index: 2;
+}
+
+.note__tape--tr {
+  top: 6px;
+  right: -10px;
+  transform: rotate(32deg);
+}
+
+.note__tape--bl {
+  bottom: 8px;
+  left: -8px;
+  transform: rotate(-20deg);
+}
+
+/* Date stamp */
+.note__date {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+/* Note heading */
+.note__heading {
+  font-family: var(--font-pixel);
+  font-size: 26px;
+  color: #1a1a8a;
+  margin-bottom: 6px;
+  text-decoration: underline;
+  text-decoration-color: rgba(26, 26, 138, .3);
+  text-underline-offset: 3px;
+}
+
+.note p {
+  margin: 0;
+}
+
+/* Back button container */
+.devlogs-back {
+  text-align: center;
+  margin-top: 8px;
 }
